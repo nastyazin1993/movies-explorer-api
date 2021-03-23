@@ -6,6 +6,13 @@ const NotFoundError = require('../errors/not-found-err');
 const BadRequestError = require('../errors/bad-request-err');
 const UnauthorizedError = require('../errors/unauthorized-err');
 const ConflictError = require('../errors/conflict-error');
+const {
+  notFoundUserIdError,
+  isUserError,
+  createUserError,
+  updateProfileError,
+  invalidMailOrPasswordError,
+} = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -15,7 +22,7 @@ const getCurrentUser = (req, res, next) => {
   User.findById(userId)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Нет пользователя с таким id');
+        throw new NotFoundError(notFoundUserIdError);
       }
       res.send(user);
     })
@@ -30,7 +37,7 @@ const createUser = (req, res, next) => {
   User.findOne({ email }).exec()
     .then((user) => {
       if (user) {
-        throw new ConflictError('Такой пользователь уже существует');
+        throw new ConflictError(isUserError);
       } else {
         bcrypt.hash(password, 10)
           .then((hash) => User.create({
@@ -40,7 +47,7 @@ const createUser = (req, res, next) => {
     })
     .then((user) => {
       if (user) {
-        throw new BadRequestError('Переданы некорректные данные');
+        throw new BadRequestError(createUserError);
       } res.send({
         data: {
           name, email,
@@ -62,7 +69,7 @@ const updateProfile = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        throw new BadRequestError('Переданы некорректные данные');
+        throw new BadRequestError(updateProfileError);
       } res.send({ data: user });
     })
     .catch(next);
@@ -81,7 +88,7 @@ const login = (req, res, next) => {
       // вернём токен
       res.send({ token });
     })
-    .catch(() => next(new UnauthorizedError('Введены неверное имя или пароль')));
+    .catch(() => next(new UnauthorizedError(invalidMailOrPasswordError)));
 };
 
 module.exports = {

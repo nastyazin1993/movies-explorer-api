@@ -1,5 +1,8 @@
 const { celebrate, Joi, CelebrateError } = require('celebrate');
 const { isURL } = require('validator');
+const {
+  invalidURL,
+} = require('../utils/constants');
 
 const headers = Joi.object().keys({
   authorization: Joi.string().required(),
@@ -30,7 +33,7 @@ const validateCreateUser = celebrate({
 const validateId = celebrate({
   headers,
   params: Joi.object().keys({
-    movieId: Joi.string().hex(),
+    movieId: Joi.string().required(),
   }),
 });
 
@@ -43,18 +46,17 @@ const validateMovies = celebrate({
     year: Joi.string().required(),
     description: Joi.string().required(),
     image: Joi.string().required().custom((value) => {
-      if (!isURL(value)) throw new CelebrateError('Некорректный URL');
+      if (!isURL(value)) throw new CelebrateError(invalidURL);
       return value;
     }),
     trailer: Joi.string().required().custom((value) => {
-      if (!isURL(value)) throw new CelebrateError('Некорректный URL');
+      if (!isURL(value)) throw new CelebrateError(invalidURL);
       return value;
     }),
     thumbnail: Joi.string().required().custom((value) => {
-      if (!isURL(value)) throw new CelebrateError('Некорректный URL');
+      if (!isURL(value)) throw new CelebrateError(invalidURL);
       return value;
     }),
-    // owner: Joi.string().required(),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
