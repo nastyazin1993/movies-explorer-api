@@ -6,6 +6,9 @@ const { errors } = require('celebrate');
 const router = require('./routes/index');
 const centralizedErrorHandler = require('./middlewares/error-handler');
 const rateLimiter = require('./middlewares/rateLimit');
+const {
+  crashError,
+} = require('./utils/constants');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
@@ -37,7 +40,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(rateLimiter);
 app.get('/crash-test', () => {
   setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
+    throw new Error(crashError);
   }, 0);
 });
 app.use('/', router);

@@ -15,6 +15,7 @@ const invalidURL = 'Некорректный URL';
 const invalidEmail = 'Введен некорректный Email';
 const emailOrPasswordError = 'Неправильные почта или пароль';
 const notFoundError = 'Запрашиваемый ресурс не найден';
+const crashError = 'Сервер сейчас упадет';
 
 module.exports = {
   notFounDataError,
@@ -32,4 +33,5 @@ module.exports = {
   invalidEmail,
   emailOrPasswordError,
   notFoundError,
+  crashError,
 };
