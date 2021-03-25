@@ -33,7 +33,10 @@ const validateCreateUser = celebrate({
 const validateId = celebrate({
   headers,
   params: Joi.object().keys({
-    movieId: Joi.string().required(),
+  //   movieId: Joi.string().required(),
+  // }),
+    movieId: Joi.string().alphanum().hex().length(24)
+      .required(),
   }),
 });
 
