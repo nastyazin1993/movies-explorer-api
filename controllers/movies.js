@@ -24,7 +24,7 @@ const createMovies = (req, res, next) => {
   const { _id } = req.user;
   const {
     country,
-    director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId,
+    director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId,
   } = req.body;
   Movies.create({
     country,
@@ -33,7 +33,7 @@ const createMovies = (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     nameRU,
     nameEN,
     thumbnail,

@@ -22,6 +22,7 @@ const hosts = [
   'https://api.nastyazin.students.nomoredomains.rocks',
   'https://www.api.nastyazin.students.nomoredomains.rocks',
   'https://www.nastyazin.students.nomoredomains.rocks',
+  'https://api.nomoreparties.co/beatfilm-movies',
 ];
 
 const mongoUrl = MONGO_URL || 'mongodb://localhost:27017/bitfilmsdb';
@@ -43,7 +44,7 @@ app.get('/crash-test', () => {
     throw new Error(crashError);
   }, 0);
 });
-app.use('/', router);
+app.use('/*', router);
 app.use(errorLogger);
 app.use(errors());
 app.use(centralizedErrorHandler);
