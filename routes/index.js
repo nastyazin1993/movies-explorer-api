@@ -12,10 +12,10 @@ const { validateUser, validateCreateUser } = require('../middlewares/validation'
 
 router.post('/signup', validateCreateUser, createUser);
 router.post('/signin', validateUser, login);
-router.use(auth);
+// router.use(auth);
 router.use('/users', auth, userRouter);
 router.use('/movies', auth, moviesRouter);
-router.use('*', () => {
+router.use('*', auth, () => {
   console.log('asdasda');
   throw new NotFoundError({ message: 'NOT_FOUND_ERROR' });
   // next(new NotFoundError(notFoundError));
