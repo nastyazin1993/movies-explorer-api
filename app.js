@@ -44,12 +44,6 @@ app.get('/crash-test', () => {
     throw new Error(crashError);
   }, 0);
 });
-// eslint-disable-next-line no-undef
-app.use(express.static(path.join(__dirname, 'build')));
-app.get('/*', (req, res) => {
-  // eslint-disable-next-line no-undef
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 app.use(router);
 app.use(errorLogger);
 app.use(errors());
