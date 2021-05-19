@@ -44,7 +44,7 @@ app.get('/crash-test', () => {
     throw new Error(crashError);
   }, 0);
 });
-app.use('/*', router);
+app.use(router);
 app.use(errorLogger);
 app.use(errors());
 app.use(centralizedErrorHandler);
