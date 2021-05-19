@@ -22,6 +22,7 @@ const hosts = [
   'https://api.nastyazin.students.nomoredomains.rocks',
   'https://www.api.nastyazin.students.nomoredomains.rocks',
   'https://www.nastyazin.students.nomoredomains.rocks',
+  'https://api.nomoreparties.co/beatfilm-movies',
 ];
 
 const mongoUrl = MONGO_URL || 'mongodb://localhost:27017/bitfilmsdb';

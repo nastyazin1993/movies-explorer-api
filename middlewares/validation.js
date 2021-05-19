@@ -52,7 +52,7 @@ const validateMovies = celebrate({
       if (!isURL(value)) throw new CelebrateError(invalidURL);
       return value;
     }),
-    trailer: Joi.string().required().custom((value) => {
+    trailerLink: Joi.string().required().custom((value) => {
       if (!isURL(value)) throw new CelebrateError(invalidURL);
       return value;
     }),
