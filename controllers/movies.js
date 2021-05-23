@@ -5,7 +5,6 @@ const ForbiddenError = require('../errors/forbiden-error');
 const {
   notFounDataError,
   createMovieError,
-  // invalidIdError,
   notFoundMovieIdError,
   ownerCardError,
 } = require('../utils/constants');
@@ -80,28 +79,6 @@ const deleteMovies = (req, res, next) => {
     })
     .catch(next);
 };
-
-// const deleteMovies = (req, res, next) => {
-//   const { movieId } = req.params;
-//   if (!Number(movieId)) next(new BadRequestError(invalidIdError));
-//   Movies.find({ movieId })
-//     .then((movie) => {
-//       console.log(movie);
-//       if (movie.length === 0) {
-//         throw new NotFoundError(notFoundMovieIdError);
-//       }
-//       const userId = req.user._id;
-//       const movieOwnerId = String(movie[0].owner);
-//       console.log(userId);
-//       console.log(movieOwnerId);
-//       if (movieOwnerId !== userId) {
-//         throw new ForbiddenError(ownerCardError);
-//       }
-//       movie[0].remove();
-//       res.send({ data: movie });
-//     })
-//     .catch(next);
-// };
 
 module.exports = {
   createMovies,
