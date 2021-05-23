@@ -1,13 +1,13 @@
 const Movies = require('../models/movie');
 const NotFoundError = require('../errors/not-found-err');
 const BadRequestError = require('../errors/bad-request-err');
-const ForbiddenError = require('../errors/forbiden-error');
+// const ForbiddenError = require('../errors/forbiden-error');
 const {
   notFounDataError,
   createMovieError,
   // invalidIdError,
   notFoundMovieIdError,
-  ownerCardError,
+  // ownerCardError,
 } = require('../utils/constants');
 
 const getMovies = (req, res, next) => {
@@ -60,9 +60,15 @@ const deleteMovies = (req, res, next) => {
       const movieOwnerId = String(movie.owner);
       console.log(userId);
       console.log(movieOwnerId);
+<<<<<<< HEAD
       if (movieOwnerId !== userId) {
        throw new ForbiddenError(ownerCardError);
       }
+=======
+      // if (movieOwnerId !== userId) {
+      //   throw new ForbiddenError(ownerCardError);
+      // }
+>>>>>>> a64150ddc3faadd6015f80dc8630d380a174eef4
       movie.remove();
       res.send({ data: movie });
     })
