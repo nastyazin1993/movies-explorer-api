@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const router = require('./routes/index');
@@ -34,7 +34,15 @@ mongoose.connect(mongoUrl, {
   useUnifiedTopology: true,
 });
 
-app.use(cors({ origin: hosts }));
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  if (hosts.includes(origin)) { // Проверяем, что значение origin есть среди разрешённых доменов
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+
+  next();
+});
+// app.use(cors({ origin: hosts }));
 app.use(requestLogger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
