@@ -59,21 +59,21 @@ const deleteMovies = (req, res, next) => {
       const movieOwnerId = String(movie.owner);
       console.log(userId);
       console.log(movieOwnerId);
-<<<<<<< HEAD
-<<<<<<< HEAD
+//<<<<<<< HEAD
+//<<<<<<< HEAD
       if (movieOwnerId !== userId) {
        throw new ForbiddenError(ownerCardError);
       }
-=======
+//=======
       // if (movieOwnerId !== userId) {
       //   throw new ForbiddenError(ownerCardError);
       // }
->>>>>>> a64150ddc3faadd6015f80dc8630d380a174eef4
-=======
+//>>>>>>> a64150ddc3faadd6015f80dc8630d380a174eef4
+//=======
       if (movieOwnerId !== userId) {
         throw new ForbiddenError(ownerCardError);
       }
->>>>>>> b33b99acb0c0f4c458e3a1c20d0e2664018cd338
+//>>>>>>> b33b99acb0c0f4c458e3a1c20d0e2664018cd338
       movie.remove();
       res.send({ data: movie });
     })
