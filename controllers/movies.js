@@ -10,7 +10,7 @@ const {
 } = require('../utils/constants');
 
 const getMovies = (req, res, next) => {
-  Movies.find()
+  Movies.find({ owner: req.user._id })
     .then((data) => {
       if (!data) {
         throw new NotFoundError(notFounDataError);
